@@ -1,3 +1,5 @@
+# app/javascript/components/UserInfo/operations.graphql
+
 query Me {
   me {
     id

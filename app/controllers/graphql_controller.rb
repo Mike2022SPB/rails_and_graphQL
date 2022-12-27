@@ -1,9 +1,4 @@
 class GraphqlController < ApplicationController
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
-
   def execute
     result = MartianLibrarySchema.execute(
       params[:query],
@@ -17,23 +12,21 @@ class GraphqlController < ApplicationController
 
   private
 
-  # Handle variables in form data, JSON body, or a blank value
-  def prepare_variables(variables_param)
-    case variables_param
+  # Handle form data, JSON body, or a blank value
+  def ensure_hash(ambiguous_param)
+    case ambiguous_param
     when String
-      if variables_param.present?
-        JSON.parse(variables_param) || {}
+      if ambiguous_param.present?
+        ensure_hash(JSON.parse(ambiguous_param))
       else
         {}
       end
-    when Hash
-      variables_param
-    when ActionController::Parameters
-      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+    when Hash, ActionController::Parameters
+      ambiguous_param
     when nil
       {}
     else
-      raise ArgumentError, "Unexpected parameter: #{variables_param}"
+      raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
   end
 
@@ -41,6 +34,6 @@ class GraphqlController < ApplicationController
     logger.error e.message
     logger.error e.backtrace.join("\n")
 
-    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+    render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
   end
 end
