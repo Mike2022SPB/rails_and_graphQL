@@ -15,7 +15,6 @@ const LibraryQuery = gql`
 `;
 
 export default () => (
-  const input = useRef(null);
   <Query query={LibraryQuery}>
     {({ data, loading }) => (
       <div>
@@ -30,26 +29,3 @@ export default () => (
     )}
   </Query>
 );
-
-    return (
-    <form
-  onSubmit={event => {
-    event.preventDefault();
-    signIn({
-      variables: { email: input.current.value },
-    }).then(({ data: { signIn: { token } } }) => {
-      if (token) {
-        localStorage.setItem('mlToken', token);
-      }
-    });
-  }}
->
-      <input
-        ref={input}
-        type="email"
-        className={cs.input}
-        placeholder="your email"
-      />
-    </form>
-  );
-};
