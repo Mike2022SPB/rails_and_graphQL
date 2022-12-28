@@ -1,6 +1,3 @@
-
-# app/graphql/mutations/add_item_mutation.rb
-
 module Mutations
   class AddItemMutation < Mutations::BaseMutation
     argument :title, String, required: true

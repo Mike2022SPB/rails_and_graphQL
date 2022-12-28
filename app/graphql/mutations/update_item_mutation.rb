@@ -1,6 +1,3 @@
-
-# app/graphql/mutations/update_item_mutation.rb
-
 module Mutations
   class UpdateItemMutation < Mutations::BaseMutation
     argument :id, ID, required: true

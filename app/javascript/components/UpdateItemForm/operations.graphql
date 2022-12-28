@@ -1,4 +1,3 @@
-# /app/javascript/components/UpdateItemForm/operations.graphql
 #import '../../fragments/Item.graphql'
 
 mutation UpdateItemMutation(
@@ -15,6 +14,10 @@ mutation UpdateItemMutation(
   ) {
     item {
       ...ItemFragment
+    }
+
+    errors {
+      fullMessages
     }
   }
 }
