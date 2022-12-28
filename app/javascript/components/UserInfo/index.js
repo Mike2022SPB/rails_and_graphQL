@@ -22,7 +22,7 @@ const UserInfo = () => {
                   });
                 }}
               >
-                {(signIn, { loading: authenticating, error /* new key */ }) =>
+                {(signIn, { loading: authenticating }) =>
                   authenticating ? (
                     '...'
                   ) : (
@@ -50,7 +50,6 @@ const UserInfo = () => {
                           className={cs.button}
                           value="Sign In"
                         />
-                        {error && <span className={cs.error}>{error.message}</span>}
                       </form>
                     </div>
                   )

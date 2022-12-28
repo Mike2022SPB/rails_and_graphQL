@@ -1,3 +1,5 @@
+// /app/javascript/components/UpdateItemForm
+
 import React from 'react';
 import { Mutation } from 'react-apollo';
 import { UpdateItemMutation } from './operations.graphql';
@@ -10,8 +12,6 @@ const UpdateItemForm = ({
   initialDescription,
   initialImageUrl,
   onClose,
-  onErrors,
-  errors,
 }) => (
   <div className={cs.overlay}>
     <div className={cs.content}>
@@ -21,7 +21,6 @@ const UpdateItemForm = ({
             initialImageUrl={initialImageUrl}
             initialTitle={initialTitle}
             initialDescription={initialDescription}
-            errors={errors}
             buttonText="Update Item"
             loading={loading}
             onProcessItem={({ title, description, imageUrl }) => {
@@ -43,11 +42,8 @@ const UpdateItemForm = ({
                       description,
                       imageUrl,
                     },
-                    errors: null,
                   },
                 },
-              }).then(({ data }) => {
-                onErrors(data.updateItem.errors);
               });
               onClose();
             }}

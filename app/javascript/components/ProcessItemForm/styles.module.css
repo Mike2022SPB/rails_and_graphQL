@@ -29,13 +29,3 @@
 .input:focus {
   border-bottom: 1px solid #bf6c35;
 }
-
-.form {
-  position: relative;
-}
-
-.errors {
-  position: absolute;
-  top: -20px;
-  color: #ff5845;
-}

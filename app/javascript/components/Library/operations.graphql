@@ -1,9 +1,11 @@
 # /app/javascript/components/Library/operations.graphql
-# import '../../fragments/Item.graphql'
 
 query LibraryQuery {
   items {
-    ...ItemFragment
+    id
+    title
+    imageUrl
+    description
     user {
       id
       email

@@ -1,3 +1,5 @@
+// app/javascript/components/ProcessItemForm/index.js
+
 import React, { useState } from 'react';
 import cs from './styles';
 
@@ -8,18 +10,12 @@ const ProcessItemForm = ({
   onProcessItem,
   buttonText,
   loading,
-  errors,
 }) => {
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
   return (
     <div className={cs.form}>
-      {errors && (
-        <div className={cs.errors}>
-          <div className="error">{errors.fullMessages.join('; ')}</div>
-        </div>
-      )}
       <input
         type="text"
         placeholder="title"

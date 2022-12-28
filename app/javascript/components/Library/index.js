@@ -1,3 +1,4 @@
+// app/javascript/components/Library
 import React, { useState } from 'react';
 import { Query } from 'react-apollo';
 import { LibraryQuery } from './operations.graphql';
@@ -6,7 +7,6 @@ import UpdateItemForm from '../UpdateItemForm';
 
 const Library = () => {
   const [item, setItem] = useState(null);
-  const [errors, setErrors] = useState({});
   return (
     <Query query={LibraryQuery}>
       {({ data, loading }) => (
@@ -31,19 +31,10 @@ const Library = () => {
           {item !== null && (
             <UpdateItemForm
               id={item.id}
-              errors={errors[item.id]}
               initialTitle={item.title}
               initialDescription={item.description}
               initialImageUrl={item.imageUrl}
               onClose={() => setItem(null)}
-              onErrors={itemUpdateErrors => {
-                if (itemUpdateErrors) {
-                  setItem({
-                    ...item,
-                  });
-                }
-                setErrors({ ...errors, [item.id]: itemUpdateErrors });
-              }}
             />
           )}
         </div>
